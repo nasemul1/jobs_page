@@ -19,8 +19,9 @@ const state = reactive({
 });
 onMounted(async () => {
     try {
-        const res = await axios.get('/api/jobs');
+        const res = await axios.get('https://job-page-backend.vercel.app/jobs');
         state.jobs = res.data;
+        console.log(state.jobs);
     } catch (error) {
         console.log("Error fetching");
     } finally {
