@@ -20,8 +20,7 @@ const state = reactive({
 onMounted(async () => {
     try {
         const res = await axios.get('https://job-page-backend.vercel.app/jobs');
-        state.jobs = res.data;
-        // console.log(state.jobs);
+        state.jobs = Array.isArray(res.data) ? res.data : []; // Ensure jobs is an array
     } catch (error) {
         console.log("Error fetching");
     } finally {
@@ -38,7 +37,7 @@ onMounted(async () => {
                 <pulseLoader />
             </div>
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Single_job v-for="job in state.jobs.slice(0, limit || state.jobs.length)" :key="job.id" :job="job"/>
+                <Single_job v-for="job in (Array.isArray(state.jobs) ? state.jobs.slice(0, limit || state.jobs.length) : [])" :key="job.id" :job="job"/>
             </div>
         </div>
         <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
