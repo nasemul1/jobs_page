@@ -14,7 +14,7 @@ export default defineConfig({
       '/api': {
         target: 'https://job-page-backend.vercel.app',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\//, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

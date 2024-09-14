@@ -21,7 +21,7 @@ const state = reactive({
 onMounted(async () => {
     try {
         const res = await axios.get('/api/jobs');
-        state.jobs = res.data;
+        state.jobs = res.data.jobs;
         // console.log(res.data);
         // console.log(state.jobs);
     } catch (error) {
