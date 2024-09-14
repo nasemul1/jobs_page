@@ -36,7 +36,7 @@ const handleSubmit = async () => {
     }
 
     try {
-        const res = await axios.post(`https://job-page-backend.vercel.app/jobs`, newjob);
+        const res = await axios.post(`/api/jobs`, newjob);
         router.push(`/jobs/${res.data.id}`);
         toast.success('Job added successfully');
     } catch (error) {

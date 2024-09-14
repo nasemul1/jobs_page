@@ -8,6 +8,16 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'https://job-page-backend.vercel.app',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

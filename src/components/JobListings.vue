@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import pulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import Single_job from './single_job.vue';
@@ -17,10 +17,13 @@ const state = reactive({
     jobs: [],
     isLoading: true
 });
+
 onMounted(async () => {
     try {
-        const res = await axios.get('https://job-page-backend.vercel.app/jobs');
-        state.jobs = Array.isArray(res.data) ? res.data : []; // Ensure jobs is an array
+        const res = await axios.get('/api/jobs');
+        state.jobs = res.data;
+        console.log(res.data);
+        console.log(state.jobs);
     } catch (error) {
         console.log("Error fetching");
     } finally {
@@ -37,7 +40,8 @@ onMounted(async () => {
                 <pulseLoader />
             </div>
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Single_job v-for="job in (Array.isArray(state.jobs) ? state.jobs.slice(0, limit || state.jobs.length) : [])" :key="job.id" :job="job"/>
+                <Single_job v-for="job in state.jobs.filter((job, index) => index < (limit || state.jobs.length))
+" :key="job.id" :job="job"/>
             </div>
         </div>
         <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
