@@ -22,8 +22,8 @@ onMounted(async () => {
     try {
         const res = await axios.get('/api/jobs');
         state.jobs = res.data;
-        console.log(res.data);
-        console.log(state.jobs);
+        // console.log(res.data);
+        // console.log(state.jobs);
     } catch (error) {
         console.log("Error fetching");
     } finally {
@@ -40,8 +40,7 @@ onMounted(async () => {
                 <pulseLoader />
             </div>
             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Single_job v-for="job in state.jobs.filter((job, index) => index < (limit || state.jobs.length))
-" :key="job.id" :job="job"/>
+                <Single_job v-for="job in state.jobs.slice(0, limit || state.jobs.length)" :key="job.id" :job="job"/>
             </div>
         </div>
         <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">

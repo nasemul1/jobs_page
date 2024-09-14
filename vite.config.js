@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
   ],
   server: {
-    port: 3000,
+    // port: 3000,
     proxy: {
       '/api': {
         target: 'https://job-page-backend.vercel.app',
