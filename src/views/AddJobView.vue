@@ -30,17 +30,18 @@ const handleSubmit = async () => {
         company: {
             name: form.company.name,
             description: form.company.description,
-            contactEmail: form.company.email,
-            contactPhone: form.company.phone
+            contactEmail: form.company.contactEmail,
+            contactPhone: form.company.contactPhone
         }
     }
 
     try {
         const res = await axios.post(`https://job-page-backend.vercel.app/jobs`, newjob);
-        router.push(`/jobs/${res.data.id}`);
+        // router.push(`/jobs/${res.data.id}`);
+        router.push(`/jobs/${res.data.job.id}`);
         toast.success('Job added successfully');
     } catch (error) {
-        console.log("Error fetching", error);
+        console.error("Error fetching:", error.response ? error.response.data : error.message);
         toast.error("Job isn't added");
     }
 }

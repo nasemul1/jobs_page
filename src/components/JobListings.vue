@@ -22,8 +22,6 @@ onMounted(async () => {
     try {
         const res = await axios.get('https://job-page-backend.vercel.app/jobs');
         state.jobs = res.data.jobs;
-        // console.log(res.data);
-        // console.log(state.jobs);
     } catch (error) {
         console.log("Error fetching");
     } finally {
