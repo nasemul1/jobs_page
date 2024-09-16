@@ -38,7 +38,7 @@ const handleSubmit = async () => {
     try {
         const res = await axios.post(`https://job-page-backend.vercel.app/jobs`, newjob);
         // router.push(`/jobs/${res.data.id}`);
-        router.push(`/jobs/${res.data.job.id}`);
+        router.push(`/jobs/${res.data.job._id}`);
         toast.success('Job added successfully');
     } catch (error) {
         console.error("Error fetching:", error.response ? error.response.data : error.message);
