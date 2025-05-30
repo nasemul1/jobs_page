@@ -19,8 +19,9 @@ const state = reactive({
 });
 
 onMounted(async () => {
+    const url = import.meta.env.VITE_API_URL;
     try {
-        const res = await axios.get('https://job-page-backend.vercel.app/jobs');
+        const res = await axios.get(url + 'jobs');
         state.jobs = res.data;
         // console.log(res.data);
     } catch (error) {

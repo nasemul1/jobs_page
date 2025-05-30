@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import router from '@/router';
 
+const url = import.meta.env.VITE_API_URL;
+
 const form = reactive({
     type: 'Full-Time',
     title: '',
@@ -36,7 +38,7 @@ const handleSubmit = async () => {
     }
 
     try {
-        const res = await axios.post(`https://job-page-backend.vercel.app/jobs`, newjob);
+        const res = await axios.post(url + 'jobs', newjob);
         // router.push(`/jobs/${res.data.id}`);
         router.push(`/jobs/${res.data.job._id}`);
         toast.success('Job added successfully');
